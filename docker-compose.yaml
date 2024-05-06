@@ -1,0 +1,29 @@
+version: '4'
+
+services:
+  web:
+    build: web
+    tty: true
+    ports:
+      - 5173:5173
+    volumes:
+      - ./web:/web
+
+  server:
+    build: server
+    tty: true
+    stdin_open: true
+    ports:
+      - 0080:0080
+    volumes:
+      - ./server:/server
+
+  database:
+    image: mariadb
+    env_file:
+      - .env
+
+  adminer:
+    image: adminer
+    ports:
+      - 8080:8080
