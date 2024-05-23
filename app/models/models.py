@@ -1,4 +1,4 @@
-import sys, sqlalchemy
+import sqlalchemy
 from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
 
@@ -8,53 +8,55 @@ Base = sqlalchemy.orm.declarative_base()
 class Invoice(Base):
     __tablename__ = "invoice"
 
-    id = Column(String, primary_key=True, autoincrement=False)
-    created_at = Column(String, name="createdAt")
-    payement_due = Column(String, name="paymentDue")
-    description = Column(String)
-    payment_terms = Column(String, name="paymentTerms")
-    client_name = Column(String, name="clientName")
-    client_email = Column(String, name="clientEmail")
-    status = Column(String)
+    id = Column(String(6), primary_key=True, autoincrement=False)
+    sender_id = Column(String(128), ForeignKey("sender_address.street"))
+    client_id = Column(String(128), ForeignKey("client_address.street"))
+    created_at = Column(String(128), name="createdAt")
+    payment_due = Column(String(128), name="paymentDue")
+    description = Column(String(128))
+    payment_terms = Column(String(128), name="paymentTerms")
+    client_name = Column(String(128), name="clientName")
+    client_email = Column(String(128), name="clientEmail")
+    status = Column(String(128))
     total = Column(Integer)
 
-    sender_address = relationship("SenderAddress", back_populates="invoice_sender")
-    client_address = relationship("ClientAddress", back_populates="invoice_client")
-    items = relationship("Items", back_populates="invoice_items")
+    sender_address = relationship("SenderAddress", back_populates="invoices")
+    client_address = relationship("ClientAddress", back_populates="invoices")
+    items = relationship("Items", back_populates="invoice")
 
 
 class SenderAddress(Base):
     __tablename__ = "sender_address"
 
-    street = Column(String, primary_key=True)
-    invoice_id = Column(String, ForeignKey("invoice.id"))
-    city = Column(String)
-    post_code = Column(String, name="postCode")
-    country = Column(String)
+    street = Column(String(128), primary_key=True)
+    invoice_id = Column(String(128))
+    city = Column(String(128))
+    post_code = Column(String(128), name="postCode")
+    country = Column(String(128))
 
-    invoice_sender = relationship("Invoice", back_populates="sender_address")
+    invoices = relationship("Invoice", back_populates="sender_address")
 
 
 class ClientAddress(Base):
     __tablename__ = "client_address"
 
-    street = Column(String, primary_key=True)
-    invoice_id = Column(String, ForeignKey("invoice.id"))
-    city = Column(String)
-    post_code = Column(String, name="postCode")
-    country = Column(String)
+    street = Column(String(128), primary_key=True)
+    invoice_id = Column(String(128))
+    city = Column(String(128))
+    post_code = Column(String(128), name="postCode")
+    country = Column(String(128))
 
-    invoice_client = relationship("Invoice", back_populates="client_address")
+    invoices = relationship("Invoice", back_populates="client_address")
 
 
 class Items(Base):
     __tablename__ = "items"
 
     items_id = Column(Integer, autoincrement=True, primary_key=True)
-    invoice_id = Column(String, ForeignKey("invoice.id"))
-    name = Column(String)
+    invoice_id = Column(String(128), ForeignKey("invoice.id"))
+    name = Column(String(128))
     quantity = Column(Integer)
     price = Column(Integer)
     total = Column(Integer)
 
-    invoice_items = relationship("Invoice", back_populates="items")
+    invoice = relationship("Invoice", back_populates="items")
