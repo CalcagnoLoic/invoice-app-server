@@ -8,7 +8,7 @@ def get_invoices(db: Session):
         .options(
             joinedload(models.Invoice.sender_address),
             joinedload(models.Invoice.client_address),
-            joinedload(models.Invoice.items)
+            joinedload(models.Invoice.items),
         )
         .all()
     )

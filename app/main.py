@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Depends
 from database.db import engine, SessionLocal
 from models.models import Invoice, SenderAddress, ClientAddress, Items, Base
-from crud.reading import get_invoices
+from crud.crud import get_invoices
 from sqlalchemy.orm import Session
 
 Base.metadata.create_all(bind=engine)
