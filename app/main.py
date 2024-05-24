@@ -1,7 +1,8 @@
-from fastapi import FastAPI, Depends
+from typing import List
+from fastapi import FastAPI, Depends, HTTPException
 from database.db import engine, SessionLocal
-from models.models import Invoice, SenderAddress, ClientAddress, Items, Base
-from crud.crud import get_invoices
+from models.models import Base
+from crud.crud import read_all_invoices, read_invoice_by_id
 from sqlalchemy.orm import Session
 
 Base.metadata.create_all(bind=engine)
@@ -17,7 +18,15 @@ def get_db():
         db.close()
 
 
-@app.get("/invoice/")
+@app.get("/invoices/")
 async def get_all_invoice(db: Session = Depends(get_db)):
-    invoice = get_invoices(db)
+    invoices = read_all_invoices(db)
+    return invoices
+
+
+@app.get("/invoices/{invoice_id}")
+async def get_invoice(invoice_id: str, db: Session = Depends(get_db)):
+    invoice = read_invoice_by_id(db, invoice_id)
+    if not invoice:
+        raise HTTPException(status_code=404, detail="Invoice not found")
     return invoice
