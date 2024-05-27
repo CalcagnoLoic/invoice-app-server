@@ -20,10 +20,12 @@ class ClientAddress(clientAddressBase):
 
 
 class ItemsBase(BaseModel):
+    items_id: int
+    invoice_id: str
     name: str
     quantity: int
-    price: int
-    total: int
+    price: float
+    total: float
 
 
 class ItemsCreate(ItemsBase):
@@ -36,6 +38,7 @@ class Items(ItemsBase):
 
 
 class SenderAddressBase(BaseModel):
+    id_sender: int
     street: str
     invoice_id: str
     city: str
@@ -54,6 +57,8 @@ class SenderAddress(SenderAddressBase):
 
 class InvoiceBase(BaseModel):
     id: str
+    sender_id: int
+    client_id: str
     created_at: str
     payment_due: str
     description: str
@@ -61,7 +66,7 @@ class InvoiceBase(BaseModel):
     client_name: str
     client_email: str
     status: str
-    total: str
+    total: float
 
 
 class InvoiceCreate(InvoiceBase):

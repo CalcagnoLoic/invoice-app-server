@@ -10,13 +10,13 @@ class Invoice(Base):
 
     id = Column(String(6), primary_key=True, autoincrement=False)
     sender_id = Column(Integer, ForeignKey("sender_address.id_sender"))
-    client_id = Column(String(128), ForeignKey("client_address.street"))
-    created_at = Column(String(128), name="createdAt")
-    payment_due = Column(String(128), name="paymentDue")
+    client_id = Column(String(128), ForeignKey("client_address.client_street"))
+    created_at = Column(String(128))
+    payment_due = Column(String(128))
     description = Column(String(128))
-    payment_terms = Column(String(128), name="paymentTerms")
-    client_name = Column(String(128), name="clientName")
-    client_email = Column(String(128), name="clientEmail")
+    payment_terms = Column(String(128))
+    client_name = Column(String(128))
+    client_email = Column(String(128))
     status = Column(String(128))
     total = Column(Float)
 
@@ -32,7 +32,7 @@ class SenderAddress(Base):
     street = Column(String(128))
     invoice_id = Column(String(128))
     city = Column(String(128))
-    post_code = Column(String(128), name="postCode")
+    postCode = Column(String(128))
     country = Column(String(128))
 
     invoices = relationship("Invoice", back_populates="sender_address")
@@ -41,11 +41,11 @@ class SenderAddress(Base):
 class ClientAddress(Base):
     __tablename__ = "client_address"
 
-    street = Column(String(128), primary_key=True)
+    client_street = Column(String(128), primary_key=True)
     invoice_id = Column(String(128))
-    city = Column(String(128))
-    post_code = Column(String(128), name="postCode")
-    country = Column(String(128))
+    client_city = Column(String(128))
+    client_postCode = Column(String(128))
+    client_country = Column(String(128))
 
     invoices = relationship("Invoice", back_populates="client_address")
 
