@@ -1,77 +1,57 @@
-from typing import List
 from pydantic import BaseModel
+from typing import List, Optional
 
 
-class clientAddressBase(BaseModel):
+class SenderAddress(BaseModel):
+    id_sender: int
     street: str
     invoice_id: str
     city: str
-    post_code: str
+    postCode: str
     country: str
 
 
-class ClientAddressCreate(clientAddressBase):
-    pass
+class ClientAddress(BaseModel):
+    client_street: str
+    invoice_id: str
+    client_city: str
+    client_postCode: str
+    client_country: str
 
 
-class ClientAddress(clientAddressBase):
-    class Config:
-        from_attributes = True
-
-
-class ItemsBase(BaseModel):
+class Item(BaseModel):
+    items_id: int
+    invoice_id: str
     name: str
     quantity: int
-    price: int
-    total: int
-
-
-class ItemsCreate(ItemsBase):
-    pass
-
-
-class Items(ItemsBase):
-    class Config:
-        from_attributes = True
-
-
-class SenderAddressBase(BaseModel):
-    street: str
-    invoice_id: str
-    city: str
-    post_code: str
-    country: str
-
-
-class SenderAddressCreate(SenderAddressBase):
-    pass
-
-
-class SenderAddress(SenderAddressBase):
-    class Config:
-        from_attributes = True
+    price: float
+    total: float
 
 
 class InvoiceBase(BaseModel):
     id: str
+    sender_id: int
+    client_id: str
     created_at: str
     payment_due: str
     description: str
     payment_terms: str
     client_name: str
-    client_email: str
+    client_email: Optional[str]
     status: str
-    total: str
+    total: float
 
 
 class InvoiceCreate(InvoiceBase):
-    pass
+    sender_address: SenderAddress
+    client_address: ClientAddress
+    items: List[Item]
 
 
 class Invoice(InvoiceBase):
-    sender_address: List[SenderAddress] = []
-    client_address: List[ClientAddress] = []
-    items: List[Items] = []
+    sender_address: SenderAddress
+    client_address: ClientAddress = None
+    items: List[Item]
 
     class Config:
         from_attributes = True

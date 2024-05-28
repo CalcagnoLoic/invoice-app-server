@@ -14,6 +14,7 @@ def read_all_invoices(db: Session):
             joinedload(models.Invoice.client_address),
             joinedload(models.Invoice.items),
         )
+        .order_by(models.Invoice.sender_id)
         .all()
     )
     return invoices
@@ -30,7 +31,11 @@ def read_invoice_by_id(db: Session, invoice_id: str):
             joinedload(models.Invoice.client_address),
             joinedload(models.Invoice.items),
         )
-        .filter(models.Invoice.id == invoice_id)
+        .where(models.Invoice.id == invoice_id)
         .first()
     )
     return [invoice]
+
+
+def create_invoice(db: Session):
+    new_invoice = models.Invoice()
