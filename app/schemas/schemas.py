@@ -14,7 +14,7 @@ class SenderAddress(BaseModel):
 class ClientAddress(BaseModel):
     client_street: str
     invoice_id: str
-    client_city: str
+    client_city: Optional[str]
     client_postCode: str
     client_country: str
 
@@ -31,7 +31,7 @@ class Item(BaseModel):
 class InvoiceBase(BaseModel):
     id: str
     sender_id: int
-    client_id: str
+    client_id: Optional[str]
     created_at: str
     payment_due: str
     description: str
@@ -50,7 +50,7 @@ class InvoiceCreate(InvoiceBase):
 
 class Invoice(InvoiceBase):
     sender_address: SenderAddress
-    client_address: ClientAddress = None
+    client_address: Optional[ClientAddress]
     items: List[Item]
 
     class Config:
