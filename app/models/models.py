@@ -9,8 +9,12 @@ class Invoice(Base):
     __tablename__ = "invoice"
 
     id = Column(String(6), primary_key=True, autoincrement=False)
-    sender_id = Column(Integer, ForeignKey("sender_address.id_sender"))
-    client_id = Column(String(128), ForeignKey("client_address.client_street"))
+    sender_id = Column(
+        Integer, ForeignKey("sender_address.id_sender", ondelete="CASCADE")
+    )
+    client_id = Column(
+        String(128), ForeignKey("client_address.client_street", ondelete="CASCADE")
+    )
     created_at = Column(String(128))
     payment_due = Column(String(128))
     description = Column(String(128))
@@ -20,9 +24,15 @@ class Invoice(Base):
     status = Column(String(128))
     total = Column(Float)
 
-    sender_address = relationship("SenderAddress", back_populates="invoices")
-    client_address = relationship("ClientAddress", back_populates="invoices")
-    items = relationship("Items", back_populates="invoice")
+    sender_address = relationship(
+        "SenderAddress", back_populates="invoices", cascade="all", single_parent=True
+    )
+    client_address = relationship(
+        "ClientAddress", back_populates="invoices", cascade="all", single_parent=True
+    )
+    items = relationship(
+        "Items", back_populates="invoice", cascade="all", single_parent=True
+    )
 
 
 class SenderAddress(Base):
@@ -54,7 +64,7 @@ class Items(Base):
     __tablename__ = "items"
 
     items_id = Column(Integer, autoincrement=True, primary_key=True)
-    invoice_id = Column(String(128), ForeignKey("invoice.id"))
+    invoice_id = Column(String(128), ForeignKey("invoice.id", ondelete="CASCADE"))
     name = Column(String(128))
     quantity = Column(Integer)
     price = Column(Float)

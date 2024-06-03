@@ -19,8 +19,11 @@ CREATE TABLE `client_address` (
 
 INSERT INTO `client_address` (`client_street`, `invoice_id`, `client_city`, `client_postCode`, `client_country`) VALUES
 ('',	'FV2353',	NULL,	NULL,	NULL),
+('123 Elm Street',	'AG5080',	'New York',	'10001',	'United States of America'),
 ('106 Kendell Street',	'RT3080',	'Sharrington',	'NR24 5WQ',	'United Kingdom'),
+('27 Oak Avenue',	'PM5925',	'Manchester',	'M2 3XY',	'United Kingdom'),
 ('3964  Queens Lane',	'TY9141',	'Gotham',	'60457',	'United States of America'),
+('10 Maple Street',	'LV4260',	'Leeds',	'LS1 2AB',	'United Kingdom'),
 ('46 Abbey Row',	'AA1449',	'Cambridge',	'CB5 6EG',	'United Kingdom'),
 ('63 Warwick Road',	'RT2080',	'Carlisle',	'CA20 2TG',	'United Kingdom'),
 ('79 Dover Road',	'RG0314',	'Westhall',	'IP19 3PF',	'United Kingdom'),
@@ -48,8 +51,11 @@ CREATE TABLE `invoice` (
 
 INSERT INTO `invoice` (`id`, `sender_id`, `client_id`, `created_at`, `payment_due`, `description`, `payment_terms`, `client_name`, `client_email`, `status`, `total`) VALUES
 ('AA1449',	5,	'46 Abbey Row',	'2021-10-7',	'2021-10-14',	'Re-branding',	'7',	'Mellisa Clarke',	'mellisa.clarke@example.com',	'pending',	4032.33),
+('AG5080',	10,	'123 Elm Street',	'2024-6-3',	'2024-6-31',	'Graphic Design',	'7',	'Anais Brown',	'anais-b@mail.com',	'pending',	7856),
 ('FV2353',	7,	NULL,	'2021-11-05',	'2021-11-12',	'Logo Re-design',	'7',	'Anita Wainwright',	NULL,	'draft',	3102.04),
+('PM5925',	9,	'27 Oak Avenue',	'2024-6-3',	'2024-6-31',	'Graphic Design',	'14',	'Sarah Johnson',	'sarah-j@mail.com',	'pending',	158),
 ('RG0314',	3,	'79 Dover Road',	'2021-9-24',	'2021-10-01',	'Website Redesign',	'7',	'John Morrison',	'jm@myco.com',	'paid',	14002.3),
+('LV4260',	8,	'10 Maple Street',	'2024-6-3',	'2024-6-31',	'Web Design',	'14',	'Jodie Ripley',	'jr@weyland-yutani.co.uk',	'pending',	125),
 ('RT2080',	4,	'63 Warwick Road',	'2021-10-11',	'2021-10-12',	'Logo Concept',	'1',	'Alysa Werner',	'alysa@email.co.uk',	'pending',	102.04),
 ('RT3080',	1,	'106 Kendell Street',	'2021-8-18',	'2021-8-19',	'Re-branding',	'1',	'Jensen Huang',	'jensenh@mail.com',	'paid',	1800.9),
 ('TY9141',	6,	'3964  Queens Lane',	'2021-10-01',	'2021-10-31',	'Landing Page Design',	'30',	'Thomas Wayne',	'thomas@dc.com',	'pending',	6155.91),
@@ -77,7 +83,9 @@ INSERT INTO `items` (`items_id`, `invoice_id`, `name`, `quantity`, `price`, `tot
 (6,	'AA1449',	'New Logo',	1,	1532.33,	1532.33),
 (7,	'AA1449',	'Brand Guidelines',	1,	2500,	2500),
 (8,	'TY9141',	'Web Design',	1,	6155.91,	6155.91),
-(9,	'FV2353',	'Logo Re-design',	1,	3102.04,	3102.04);
+(9,	'PM5925',	'Logo Re-design',	1,	158,	158),
+(10,	'AG5080',	'Web fullstack design',	1,	7856,	7856),
+(11,	'LV4260',	'Web design',	1,	125,	125);
 
 DROP TABLE IF EXISTS `sender_address`;
 CREATE TABLE `sender_address` (
@@ -97,6 +105,9 @@ INSERT INTO `sender_address` (`id_sender`, `street`, `invoice_id`, `city`, `post
 (4,	'19 Union Terrace',	'RT2080',	'London',	'E1 3EZ',	'United Kingdom'),
 (5,	'19 Union Terrace',	'AA1449',	'London',	'E1 3EZ',	'United Kingdom'),
 (6,	'19 Union Terrace',	'TY9141',	'London',	'E1 3EZ',	'United Kingdom'),
-(7,	'19 Union Terrace',	'FV2353',	'London',	'E1 3EZ',	'United Kingdom');
+(7,	'19 Union Terrace',	'FV2353',	'London',	'E1 3EZ',	'United Kingdom'),
+(8,	'19 Union Terrace',	'LV4260',	'London',	'E1 3EZ',	'United Kingdom'),
+(9,	'19 Union Terrace',	'PM5925',	'London',	'E1 3EZ',	'United Kingdom'),
+(10,	'19 Union Terrace',	'AG5080',	'London',	'E1 3EZ',	'United Kingdom');
 
--- 2024-05-31 08:07:07
+-- 2024-06-03 12:17:05

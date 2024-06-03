@@ -5,26 +5,22 @@ from sqlalchemy.orm import Session
 
 from database.db import engine, SessionLocal
 from models.models import Base
-from controllers.controllers import read_all_invoices, read_invoice_by_id
+from controllers.controllers import *
 from schemas.schemas import Invoice
 
 app = FastAPI()
 
-origins = [
-    "http://localhost:8000/invoices",
-    "http://localhost:8000",
-    "http://localhost:5173",
-    "http://localhost:5173/invoice-app-web/",
-]
+origins = ["http://localhost:5173", "localhost:5173"]
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["GET", "POST", "PUT", "DELETE"],
     allow_headers=["*"],
 )
 
+#Base.metadata.drop_all(bind=engine)
 Base.metadata.create_all(bind=engine)
 
 
@@ -60,6 +56,12 @@ async def edit_invoice(db: Session = Depends(get_db)):
     pass
 
 
-@app.delete("/invoices/{invoice_id}")
-async def delete_invoice(db: Session = Depends(get_db)):
-    pass
+@app.delete("/remove-invoice/{invoice_id}")
+async def delete_invoice(invoice_id: str, db: Session = Depends(get_db)):
+    invoice_deleted = delete_one_invoice(db, invoice_id)
+    if not invoice_deleted:
+        raise HTTPException(status_code=404, detail="Invoice not found")
+
+    db.delete(invoice_deleted)
+    db.commit()
+    return {"ok": True}
