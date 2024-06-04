@@ -35,7 +35,7 @@ class InvoiceBase(BaseModel):
     created_at: str
     payment_due: str
     description: str
-    payment_terms: str
+    payment_terms: int
     client_name: str
     client_email: Optional[str]
     status: str

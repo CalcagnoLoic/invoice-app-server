@@ -2,7 +2,13 @@ import string
 import random
 
 
-def generator_invoice_id():
+def generator_invoice_id() -> string:
+    """Generate a new ID for each invoices.
+
+    Returns:
+        The ID of each invoice in XX0000 format.
+    """
+
     letter = string.ascii_uppercase
     number = string.digits
 

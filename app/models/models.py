@@ -18,7 +18,7 @@ class Invoice(Base):
     created_at = Column(String(128))
     payment_due = Column(String(128))
     description = Column(String(128))
-    payment_terms = Column(String(128))
+    payment_terms = Column(Integer)
     client_name = Column(String(128))
     client_email = Column(String(128))
     status = Column(String(128))

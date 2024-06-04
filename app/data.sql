@@ -50,16 +50,16 @@ CREATE TABLE `invoice` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 INSERT INTO `invoice` (`id`, `sender_id`, `client_id`, `created_at`, `payment_due`, `description`, `payment_terms`, `client_name`, `client_email`, `status`, `total`) VALUES
-('AA1449',	5,	'46 Abbey Row',	'2021-10-7',	'2021-10-14',	'Re-branding',	'7',	'Mellisa Clarke',	'mellisa.clarke@example.com',	'pending',	4032.33),
-('AG5080',	10,	'123 Elm Street',	'2024-6-3',	'2024-6-31',	'Graphic Design',	'7',	'Anais Brown',	'anais-b@mail.com',	'pending',	7856),
-('FV2353',	7,	NULL,	'2021-11-05',	'2021-11-12',	'Logo Re-design',	'7',	'Anita Wainwright',	NULL,	'draft',	3102.04),
-('PM5925',	9,	'27 Oak Avenue',	'2024-6-3',	'2024-6-31',	'Graphic Design',	'14',	'Sarah Johnson',	'sarah-j@mail.com',	'pending',	158),
-('RG0314',	3,	'79 Dover Road',	'2021-9-24',	'2021-10-01',	'Website Redesign',	'7',	'John Morrison',	'jm@myco.com',	'paid',	14002.3),
-('LV4260',	8,	'10 Maple Street',	'2024-6-3',	'2024-6-31',	'Web Design',	'14',	'Jodie Ripley',	'jr@weyland-yutani.co.uk',	'pending',	125),
-('RT2080',	4,	'63 Warwick Road',	'2021-10-11',	'2021-10-12',	'Logo Concept',	'1',	'Alysa Werner',	'alysa@email.co.uk',	'pending',	102.04),
-('RT3080',	1,	'106 Kendell Street',	'2021-8-18',	'2021-8-19',	'Re-branding',	'1',	'Jensen Huang',	'jensenh@mail.com',	'paid',	1800.9),
-('TY9141',	6,	'3964  Queens Lane',	'2021-10-01',	'2021-10-31',	'Landing Page Design',	'30',	'Thomas Wayne',	'thomas@dc.com',	'pending',	6155.91),
-('XM9141',	2,	'84 Church Way',	'2021-8-21',	'2021-9-20',	'Graphic Design',	'30',	'Alex Grim',	'alexgrim@mail.com',	'pending',	556);
+('AA1449',	5,	'46 Abbey Row',	'2023-1-7',	'2023-1-14',	'Re-branding',	'7',	'Mellisa Clarke',	'mellisa.clarke@example.com',	'pending',	4032.33),
+('AG5080',	10,	'123 Elm Street',	'2024-6-3',	'2024-6-10',	'Graphic Design',	'7',	'Anais Brown',	'anais-b@mail.com',	'pending',	7856),
+('FV2353',	7,	NULL,	'2024-6-1',	'2024-6-8',	'Logo Re-design',	'7',	'Anita Wainwright',	NULL,	'draft',	3102.04),
+('LV4260',	8,	'10 Maple Street',	'2024-6-3',	'2024-6-17',	'Web Design',	'14',	'Jodie Ripley',	'jr@weyland-yutani.co.uk',	'paid',	125),
+('PM5925',	9,	'27 Oak Avenue',	'2024-6-3',	'2024-6-17',	'Graphic Design',	'14',	'Sarah Johnson',	'sarah-j@mail.com',	'pending',	158),
+('RG0314',	3,	'79 Dover Road',	'2023-9-24',	'2023-10-01',	'Website Redesign',	'7',	'John Morrison',	'jm@myco.com',	'paid',	14002.3),
+('RT2080',	4,	'63 Warwick Road',	'2024-3-11',	'2024-3-12',	'Logo Concept',	'1',	'Alysa Werner',	'alysa@email.co.uk',	'paid',	102.04),
+('RT3080',	1,	'106 Kendell Street',	'2023-6-18',	'2023-6-19',	'Re-branding',	'1',	'Jensen Huang',	'jensenh@mail.com',	'paid',	1800.9),
+('TY9141',	6,	'3964  Queens Lane',	'2023-10-01',	'2023-10-31',	'Landing Page Design',	'30',	'Thomas Wayne',	'thomas@dc.com',	'pending',	6155.91),
+('XM9141',	2,	'84 Church Way',	'2023-8-21',	'2023-9-20',	'Graphic Design',	'30',	'Alex Grim',	'alexgrim@mail.com',	'paid',	556);
 
 DROP TABLE IF EXISTS `items`;
 CREATE TABLE `items` (
