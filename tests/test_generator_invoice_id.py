@@ -10,6 +10,6 @@ class TestGeneratorInvoiceID(unittest.TestCase):
 
     def test_pattern_id(self):
         string = generator_invoice_id()
-        pattern = "\D{2}\d{4}"
+        pattern = r"\D{2}\d{4}"
 
-        self.assertEqual(re.search(pattern, string), True)
+        self.assertEqual(bool(re.match(pattern, string)), True)
