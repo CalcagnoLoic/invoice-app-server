@@ -16,7 +16,7 @@
 
 🛑With docker compose, locally, the database is persisted but not made available on github. To access the data in the database, you'll find a file called `data.sql` in the app folder. To use it, start docker compose and connect to the Adminer service. 🛑
 
-To connect to the database service, simply write these environment variables to a file named `.env` at the root of backend folder and in the app folder. These variables is dummy data. During the development phase, these variables will no longer be available.
+To connect to the database service, simply write these environment variables to a file named `.env` at the root of app folder. These variables is dummy data. During the development phase, these variables will no longer be available.
 
 ```
 MARIADB_USER=admin@invoice-app
